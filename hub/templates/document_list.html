@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Documents - Cashflowerhub{% endblock %}
+
+{% block content %}
+    <h2 class="my-4">Documents</h2>
+    <a href="{% url 'document_add' %}" type="button" class="btn btn-success">Add document</a>
+    <div class="doc-grid">
+        {% for document in documents %}
+            <div class="doc-item">
+                <h5 class="doc-title mb-2"><a href="{% url 'document_detail' pk=document.pk %}">{{ document.name }}</a></h5>
+                <p class="doc-file mb-1">File: <a href="{{ document.file.url }}">{{ document.file.name }}</a></p>
+                <p class="doc-models mb-0">Models:
+                {% for model in document.cash_flow_models.all %}
+                    {{ model.name }} {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

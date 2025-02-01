@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Document - CashflowerHub{% endblock %}
+
+{% block content %}
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete "{{ object.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirm</button>
+        <a href="{% url 'document_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

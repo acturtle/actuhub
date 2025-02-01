@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Runs - Cashflowerhub{% endblock %}
+
+{% block content %}
+    <h2 class="my-4">Runs</h2>
+    <a href="{% url 'run_add' %}" type="button" class="btn btn-success">Add run</a>
+    <div class="run-list">
+        {% for run in runs %}
+            <div class="run-item" id="run-{{ run.id }}">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center run-details">
+                        <p class="run-info id mb-0"><a href="{% url 'run_detail' pk=run.pk %}"><b>#{{ run.id }}</b></a></p>
+                        <p class="run-info model mb-0">Model: <b>{{ run.cash_flow_model.name }}</b></p>
+                        {% if run.version %}
+                        <p class="run-info version mb-0">Version: <b>{{ run.version }}</b></p>
+                        {% endif %}
+                    </div>
+                    <div class="run-status {% if run.status == 'completed' %}completed{% elif run.status == 'running' %}running{% elif run.status == 'error' %}error{% else %}pending{% endif %}">{{ run.status }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function updateRunStatuses() {
+            fetch("{% url 'runs_status' %}")
+                .then(response => response.json())
+                .then(data => {
+                    const runList = document.getElementById('run-list');
+                    data.runs.forEach(run => {
+                        // Find the corresponding run-item div
+                        const runDiv = document.getElementById(`run-${run.id}`);
+                        if (runDiv) {
+                            // Update status text
+                            const statusDiv = runDiv.querySelector('.run-status');
+                            if (statusDiv) {
+                                statusDiv.textContent = run.status;
+
+                                // Update status class
+                                statusDiv.className = `run-status ${run.status}`;
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching run statuses:', error));
+        }
+
+        // Poll the server every 5 seconds
+        setInterval(updateRunStatuses, 5000);
+    </script>
+{% endblock %}
