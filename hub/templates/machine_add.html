@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Add run - ActuHub{% endblock %}
+{% block title %}Add machine - ActuHub{% endblock %}
 
 {% block content %}
-    <h2 class="my-4">Add run</h2>
+    <h2 class="my-4">Add machine</h2>
     <form method="post" class="form-horizontal">
         {% csrf_token %}
         <div class="container">
@@ -14,11 +14,6 @@
                     </label>
                     <div class="col-sm-9">
                         {{ field }}
-                        {% if field.errors %}
-                            <div class="text-danger mt-1">
-                                {{ field.errors|join:" " }}
-                            </div>
-                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

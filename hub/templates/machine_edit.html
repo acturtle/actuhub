@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Add run - ActuHub{% endblock %}
+{% block title %}Edit machine - ActuHub{% endblock %}
 
 {% block content %}
-    <h2 class="my-4">Add run</h2>
+    <h2 class="my-4">Edit machine</h2>
     <form method="post" class="form-horizontal">
         {% csrf_token %}
         <div class="container">
@@ -14,17 +14,13 @@
                     </label>
                     <div class="col-sm-9">
                         {{ field }}
-                        {% if field.errors %}
-                            <div class="text-danger mt-1">
-                                {{ field.errors|join:" " }}
-                            </div>
-                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
             <div class="form-group row">
                 <div class="col-sm-9 offset-sm-3">
                     <button type="submit" class="btn btn-success">Save</button>
+                    <a href="{% url 'model_list' %}" class="btn btn-secondary">Cancel</a>
                 </div>
             </div>
         </div>

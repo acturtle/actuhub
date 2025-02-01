@@ -7,7 +7,7 @@ from queue import Queue
 from threading import Thread
 
 from .forms import CashFlowModelForm, DocumentForm, RunForm
-from .models import CashFlowModel, Document, Run
+from .models import CashFlowModel, Document, Machine, Run
 from .utils import process_run
 
 RUN_QUEUE = Queue()
@@ -118,6 +118,37 @@ class DocumentDeleteView(DeleteView):
     model = Document
     template_name = 'document_delete.html'
     success_url = reverse_lazy('document_list')
+
+
+class MachineListView(ListView):
+    model = Machine
+    template_name = 'machine_list.html'
+    context_object_name = 'machines'
+
+
+class MachineCreateView(CreateView):
+    model = Machine
+    form_class = DocumentForm
+    template_name = 'machine_add.html'
+    success_url = reverse_lazy('machine_list')
+
+
+class MachineDetailView(DetailView):
+    model = Machine
+    template_name = 'machine_detail.html'
+    context_object_name = 'machine'
+
+
+class Machine(UpdateView):
+    model = Machine
+    template_name = 'machine_edit.html'
+    success_url = reverse_lazy('machine_list')
+
+
+class MachineDeleteView(DeleteView):
+    model = Machine
+    template_name = 'machine_delete.html'
+    success_url = reverse_lazy('machine_list')
 
 
 @csrf_exempt

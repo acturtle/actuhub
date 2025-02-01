@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Machines - Cashflowerhub{% endblock %}
+
+{% block content %}
+    <h2 class="my-4">Machines</h2>
+    <a href="{% url 'model_add' %}" type="button" class="btn btn-success">Add machine</a>
+    <div class="model-list">
+        {% for machine in machines %}
+            <div class="model-item">
+                <h5 class="model-title"><a href="{% url 'model_detail' pk=model.pk %}">{{ machine.name }}</a></h5>
+                <p class="model-repo"><a href="{{ model.repository_url }}">{{ machine.repository_url }}</a></p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

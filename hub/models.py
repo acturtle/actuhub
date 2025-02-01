@@ -69,3 +69,12 @@ class Document(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Machine(models.Model):
+    ec2_instance_ip = models.GenericIPAddressField()
+    private_key_path = models.CharField(max_length=255)
+    username = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"Machine {self.ec2_instance_ip} - {self.username}"

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}CashflowerHub{% endblock %}</title>
+    <title>{% block title %}ActuHub{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu&display=swap">
@@ -14,7 +14,7 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <div class="sidebar-heading"><a href="{% url 'home' %}">CashflowerHub</a></div>
+            <div class="sidebar-heading"><a href="{% url 'home' %}">ActuHub</a></div>
             <div class="list-group list-group-flush">
                 <a href="{% url 'model_list' %}" class="list-group-item list-group-item-action">
                     <i class="fas fa-chart-line"></i> Models
@@ -24,6 +24,9 @@
                 </a>
                 <a href="{% url 'document_list' %}" class="list-group-item list-group-item-action">
                     <i class="fas fa-file-alt"></i> Documents
+                </a>
+                <a href="{% url 'document_list' %}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-file-alt"></i> Machines
                 </a>
             </div>
         </div>
