@@ -19,6 +19,13 @@ body {
     height: 100vh;
 }
 
+#page-content-wrapper {
+    flex-grow: 1;
+    background-color: #f8f9fa;
+    padding: 0;
+
+}
+
 .sidebar-heading {
     font-size: 1.25rem;
     font-weight: bold;
@@ -39,11 +46,10 @@ body {
     border-radius: 8px;
 }
 
-#page-content-wrapper {
-    flex-grow: 1;
-    background-color: #f8f9fa;
-    padding: 0;
-
+.list-group-item i {
+    margin-right: 10px;
+    color: #333;
+    font-size: 1rem;
 }
 
 .navbar {
@@ -91,7 +97,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Ensure the last item also takes up half the width */
 .model-item:last-child {
     flex: 0 1 calc(50% - 15px);
 }
@@ -126,6 +131,59 @@ body {
     color: #888;
 }
 
+/* Machines */
+.machine-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+.machine-item {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+    flex: 0 1 calc(50% - 15px);
+    box-sizing: border-box;
+}
+
+.machine-item:hover {
+    background-color: #f8f9fa;
+}
+
+.machine-title {
+    color: #333;
+    font-weight: bold;
+}
+
+.machine-title a {
+    text-decoration: none;
+    color: #2E7D32;
+}
+
+.machine-title a:hover {
+    text-decoration: underline;
+}
+
+.machine-details {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.machine-ip {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.machine-key {
+    font-size: 0.85rem;
+    color: #888;
+}
+
 /* Runs */
 .run-list {
     margin-top: 20px;
@@ -144,12 +202,10 @@ body {
     background-color: #f8f9fa;
 }
 
-/* Flex container for model, version, and ID */
 .run-details {
     width: 75%; /* Take up space but leave room for status */
 }
 
-/* Ensure each item is aligned with a fixed width */
 .run-info.model {
     width: 40%; /* Adjust to match the longest model names */
 }
@@ -162,14 +218,12 @@ body {
     width: 15%; /* Consistent width for ID */
 }
 
-/* Adjust font styles */
 .run-info {
     font-size: 1rem;
     color: #333;
     margin-right: 15px;
 }
 
-/* Status styling */
 .run-status {
     padding: 5px 10px;
     border-radius: 12px;
@@ -285,7 +339,7 @@ body {
     text-decoration: underline;
 }
 
-/* Responsive grid for smaller screens */
+/* Media */
 @media (max-width: 992px) {
     .doc-item {
         width: calc(50% - 20px); /* 2 cards per row for medium screens */
@@ -296,10 +350,7 @@ body {
     .doc-item {
         width: 100%; /* 1 card per row for small screens */
     }
-}
 
-/* Media */
-@media (max-width: 768px) {
     #sidebar-wrapper {
         width: 100%;
         height: auto;
@@ -308,11 +359,4 @@ body {
     #page-content-wrapper {
         width: 100%;
     }
-}
-
-
-.list-group-item i {
-    margin-right: 10px;
-    color: #333; /* You can adjust the color as needed */
-    font-size: 1rem; /* Adjust icon size */
 }

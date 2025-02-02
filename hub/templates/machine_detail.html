@@ -5,8 +5,6 @@
 {% block content %}
     <h2 class="my-4">{{ machine.name }} </h2>
     <p>ID: {{ machine.id }}</p>
-    <p>Repository URL: <a href="{{ model.repository_url }}">{{ machine.repository_url }}</a></p>
-    <p>Description: {{ machine.description }}</p>
-    <a href="{% url 'model_edit' model.pk %}" class="btn btn-primary btn-sm mr-2">Edit</a>
-    <a href="{% url 'model_delete' model.pk %}" class="btn btn-danger btn-sm">Delete</a>
+    <a href="{% url 'machine_edit' machine.pk %}" class="btn btn-primary btn-sm mr-2">Edit</a>
+    <a href="{% url 'machine_delete' machine.pk %}" class="btn btn-danger btn-sm">Delete</a>
 {% endblock %}

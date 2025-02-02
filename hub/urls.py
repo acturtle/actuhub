@@ -25,4 +25,11 @@ urlpatterns = [
     path('document/<int:pk>/', views.DocumentDetailView.as_view(), name='document_detail'),
     path('document/edit/<int:pk>/', views.DocumentUpdateView.as_view(), name='document_edit'),
     path('document/delete/<int:pk>/', views.DocumentDeleteView.as_view(), name='document_delete'),
+
+    # Machine
+    path('machine/', views.MachineListView.as_view(), name='machine_list'),
+    path('machine/add/', views.MachineCreateView.as_view(), name='machine_add'),
+    path('machine/<int:pk>/', views.MachineDetailView.as_view(), name='machine_detail'),
+    path('machine/edit/<int:pk>/', views.MachineUpdateView.as_view(), name='machine_edit'),
+    path('machine/delete/<int:pk>/', views.MachineDeleteView.as_view(), name='machine_delete'),
 ]

@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from queue import Queue
 from threading import Thread
 
-from .forms import CashFlowModelForm, DocumentForm, RunForm
+from .forms import CashFlowModelForm, DocumentForm, MachineForm, RunForm
 from .models import CashFlowModel, Document, Machine, Run
 from .utils import process_run
 
@@ -128,7 +128,7 @@ class MachineListView(ListView):
 
 class MachineCreateView(CreateView):
     model = Machine
-    form_class = DocumentForm
+    form_class = MachineForm
     template_name = 'machine_add.html'
     success_url = reverse_lazy('machine_list')
 
@@ -139,9 +139,10 @@ class MachineDetailView(DetailView):
     context_object_name = 'machine'
 
 
-class Machine(UpdateView):
+class MachineUpdateView(UpdateView):
     model = Machine
     template_name = 'machine_edit.html'
+    fields = ['name', 'ec2_instance_ip', 'private_key_path', 'username']
     success_url = reverse_lazy('machine_list')
 
 
