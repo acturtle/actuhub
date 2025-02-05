@@ -73,9 +73,9 @@ class Document(models.Model):
 
 class Machine(models.Model):
     name = models.CharField(max_length=100, blank=True)
-    ec2_instance_ip = models.GenericIPAddressField(blank=True, null=True)
-    private_key_path = models.CharField(max_length=255, blank=True)
-    username = models.CharField(max_length=50, blank=True)
+    ip_address = models.GenericIPAddressField(blank=True, null=True)
+    ssh_key_path = models.CharField(max_length=255, blank=True)
+    ssh_username = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
-        return f"Machine {self.name or self.ec2_instance_ip or 'Unnamed'}"
+        return f"Machine {self.name or self.ip_address or 'Unnamed'}"
