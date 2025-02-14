@@ -14,3 +14,4 @@ def exec_command(ssh, command):
         print(f"Exception:\n{str(e)}")
 
     return None
+
