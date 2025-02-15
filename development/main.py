@@ -4,7 +4,6 @@ from core import Execution, Job, Machine, Run
 # We have EC2 machines
 machine_1 = Machine(ip_address="52.207.233.138", ssh_key_path="ubuntu-machines.pem", ssh_username="ubuntu")
 # machine_2 = Machine(machine_id=2, ip_address=, ssh_key_path="ubuntu-machines.pem", ssh_username="ubuntu")
-# machine_3 = Machine(machine_id=3, ip_address=, ssh_key_path="ubuntu-machines.pem", ssh_username="ubuntu")
 
 # We have Runs
 run_1 = Run(model="https://github.com/acturtle/life-insurance", versions=[1, 2])
