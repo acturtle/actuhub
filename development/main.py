@@ -16,11 +16,11 @@ ec2_client = boto3.client('ec2')
 machine_1 = Machine(ec2_client=ec2_client, instance_id="i-02a2e2e65f4ad6c77")
 machine_2 = Machine(ec2_client=ec2_client, instance_id="i-0dcb10c450e33abad")
 
-# machine_1.setup()
-# machine_2.setup()
+machine_1.start()
+machine_2.start()
 
-# machine_1.start()
-# machine_2.start()
+machine_1.setup()
+machine_2.setup()
 
 machines = [machine_1, machine_2]
 
@@ -52,8 +52,8 @@ for thread in threads:
     thread.join()
 
 # Stop machines
-# machine_1.stop()
-# machine_2.stop()
+machine_1.stop()
+machine_2.stop()
 
 # Aggregate results
 s3_client = boto3.client('s3')
@@ -63,4 +63,4 @@ output_chunk2 = load_from_s3(s3_client, "actuhub-dev", "output-chunk2.csv")
 diagnostic = load_from_s3(s3_client, "actuhub-dev", "diagnostic1.csv")
 
 result = aggregate(output_chunk1, output_chunk2, diagnostic)
-result.to_csv("a-really-awesome-output.csv")
+result.to_csv("a-really-awesome-output3.csv")

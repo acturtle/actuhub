@@ -20,6 +20,11 @@ class Machine:
         response = self.ec2_client.describe_instances(InstanceIds=[self.instance_id])
         return response['Reservations'][0]['Instances'][0].get('PublicIpAddress')
 
+    def start(self):
+        self.ec2_client.start_instances(InstanceIds=[self.instance_id])
+        waiter = self.ec2_client.get_waiter('instance_running')
+        waiter.wait(InstanceIds=[self.instance_id])
+
     def setup(self):
         """Install git, python, venv and pip"""
         commands = [
@@ -32,21 +37,13 @@ class Machine:
             "python3 -m venv venv"
         ]
 
-        ssh = paramiko.SSHClient()
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(self.ip, username=self.ssh_username, key_filename=self.ssh_key_path)
+        with paramiko.SSHClient() as ssh:
+            ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            ssh.connect(self.ip, username=self.ssh_username, key_filename=self.ssh_key_path)
 
-        for command in commands:
-            print(f"\nCommand: {command}")
-            exec_command(ssh, command)
-
-    def start(self):
-        self.ec2_client.start_instances(InstanceIds=[self.instance_id])
-        waiter = self.ec2_client.get_waiter('instance_running')
-        waiter.wait(InstanceIds=[self.instance_id])
-
-    def stop(self):
-        self.ec2_client.stop_instances(InstanceIds=[self.instance_id])
+            for command in commands:
+                print(f"\nCommand: {command}")
+                exec_command(ssh, command)
 
     def run_job(self, job):
         with self.lock:
@@ -69,15 +66,18 @@ class Machine:
                 f"source ~/venv/bin/activate && cd life-insurance && {run_command}"  # TODO - replace repo
             ]
 
-            ssh = paramiko.SSHClient()
-            ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            ssh.connect(self.ip, username=self.ssh_username, key_filename=self.ssh_key_path)
+            with paramiko.SSHClient() as ssh:
+                ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                ssh.connect(self.ip, username=self.ssh_username, key_filename=self.ssh_key_path)
 
-            for command in commands:
-                print(f"\nCommand: {command}")
-                exec_command(ssh, command, show_output=True)
+                for command in commands:
+                    print(f"\nCommand: {command}")
+                    exec_command(ssh, command, show_output=True)
 
             self.available.set()
+
+    def stop(self):
+        self.ec2_client.stop_instances(InstanceIds=[self.instance_id])
 
 
 class Run:
